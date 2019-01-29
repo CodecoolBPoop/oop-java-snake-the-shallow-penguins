@@ -15,11 +15,6 @@ import javafx.geometry.Point2D;
 
 public class SquareEnemy extends Enemy implements Animatable, Interactable {
 
-    private Point2D heading;
-    private static Random rnd = new Random();
-
-    // distance travelled
-    private int travelled;
 
     public SquareEnemy() {
         super(10);
@@ -29,7 +24,7 @@ public class SquareEnemy extends Enemy implements Animatable, Interactable {
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        double direction = rnd.nextInt(4) * 90;
+        direction = rnd.nextInt(4) * 90;
         setRotate(direction);
 
 
@@ -41,7 +36,8 @@ public class SquareEnemy extends Enemy implements Animatable, Interactable {
     public void step() {
 
         if (isOutOfBounds()) {
-            destroy();
+//            destroy();
+            heading = Utils.directionToVector(direction + 180, rnd.nextInt(3) + 1);
         }
 
         travelled += Math.abs(heading.getX()) + Math.abs(heading.getY());

@@ -14,10 +14,6 @@ import javafx.geometry.Point2D;
 
 public class RandomEnemy extends Enemy implements Animatable, Interactable {
 
-    private Point2D heading;
-    private static Random rnd = new Random();
-    private int travelled;
-
     public RandomEnemy() {
         super(10);
         travelled = rnd.nextInt(180);
@@ -26,7 +22,7 @@ public class RandomEnemy extends Enemy implements Animatable, Interactable {
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        double direction = rnd.nextInt(4) * 90;
+        direction = rnd.nextInt(4) * 90;
         setRotate(direction);
 
 
@@ -39,8 +35,10 @@ public class RandomEnemy extends Enemy implements Animatable, Interactable {
         int distance = rnd.nextInt(200) + 50;
 
         if (isOutOfBounds()) {
-            // bounceBack();
-            destroy();
+            bounceBack();
+//            destroy();
+
+            direction += 180;
         }
 
         travelled += Math.abs(heading.getX()) + Math.abs(heading.getY());

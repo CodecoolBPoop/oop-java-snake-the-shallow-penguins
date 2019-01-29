@@ -14,7 +14,6 @@ import javafx.geometry.Point2D;
 
 public class SimpleEnemy extends Enemy implements Animatable, Interactable {
 
-    private Point2D heading;
     private static Random rnd = new Random();
 
     public SimpleEnemy() {
@@ -34,7 +33,8 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
     @Override
     public void step() {
         if (isOutOfBounds()) {
-            destroy();
+//            destroy();
+            bounceBack();
         }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
