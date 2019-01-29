@@ -23,7 +23,7 @@ public class SquareEnemy extends Enemy implements Animatable, Interactable {
 
     public SquareEnemy() {
         super(10);
-        travelled = 0;
+        travelled = rnd.nextInt(360);
 
         setImage(Globals.getInstance().getImage("SquareEnemy"));
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
@@ -39,6 +39,7 @@ public class SquareEnemy extends Enemy implements Animatable, Interactable {
 
     @Override
     public void step() {
+
         if (isOutOfBounds()) {
             destroy();
         }
@@ -47,7 +48,7 @@ public class SquareEnemy extends Enemy implements Animatable, Interactable {
         System.out.println(travelled);
         if (travelled % 90 == 0) {
             double direction = travelled;
-            heading = Utils.directionToVector(direction, 1);
+            heading = Utils.directionToVector(direction, rnd.nextInt(4) + 1);
         }
 
 
