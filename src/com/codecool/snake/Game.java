@@ -8,14 +8,19 @@ import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.eventhandler.InputHandler;
 
 import com.sun.javafx.geom.Vec2d;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+
 
 
 public class Game extends Pane {
     private Snake snake = null;
     private GameTimer gameTimer = new GameTimer();
-
 
     public Game() {
         Globals.getInstance().game = this;
@@ -23,6 +28,9 @@ public class Game extends Pane {
         Globals.getInstance().setupResources();
 
         init();
+
+        displayHealth();
+
     }
 
     public void init() {
@@ -34,6 +42,9 @@ public class Game extends Pane {
 
         GameLoop gameLoop = new GameLoop(snake);
         Globals.getInstance().setGameLoop(gameLoop);
+
+
+
         gameTimer.setup(gameLoop::step);
         gameTimer.play();
     }
@@ -41,6 +52,31 @@ public class Game extends Pane {
     public void start() {
         setupInputHandling();
         Globals.getInstance().startGame();
+
+    }
+
+    public void displayHealth(){
+
+
+        Text t = new Text (90,35, "" + snake.getHealth());
+        t.setFont(Font.font ("Verdana", FontWeight.BOLD, 32));
+        t.setFill(Color.rgb(250,118,114));
+
+        Text healthNum = new Text( 10, 35, "Health: ");
+        healthNum.setFont(Font.font ("Fraktur", FontWeight.EXTRA_BOLD, 22));
+        healthNum.setFill(Color.rgb(7,128,4));
+
+
+        for (Node node : getChildren()
+             ) {
+            System.out.println(node.toString());
+            if (node instanceof Text){
+                getChildren().remove(node);
+            }
+        }
+
+        getChildren().add(healthNum);
+        getChildren().add(t);
     }
 
     private void spawnSnake() {
@@ -64,6 +100,7 @@ public class Game extends Pane {
     }
 
     private void setupInputHandling() {
+
         Scene scene = getScene();
         scene.setOnKeyPressed(event -> InputHandler.getInstance().setKeyPressed(event.getCode()));
         scene.setOnKeyReleased(event -> InputHandler.getInstance().setKeyReleased(event.getCode()));
