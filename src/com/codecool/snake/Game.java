@@ -81,7 +81,18 @@ public class Game extends Pane {
     }
 
     public void restartGame() {
-        this.getChildren().clear();
+
+//        this.getChildren().clear();
+
+        Globals.getInstance().display.clear();
+//        this.getChildren().removeAll();
+//
+//        for (int i = 0; i < getChildren().size(); i++) {
+//            getChildren().get(i).
+//        }
+
+
+
         System.out.println(this.getChildren());
 
         Globals.getInstance().game = this;
