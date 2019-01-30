@@ -12,19 +12,19 @@ import javafx.geometry.Point2D;
 
 
 
-public class SimpleEnemy extends Enemy implements Animatable, Interactable {
+public class RandomEnemy extends Enemy implements Animatable, Interactable {
 
-    private static Random rnd = new Random();
+    public RandomEnemy() {
+        super(13);
+        travelled = rnd.nextInt(180);
 
-    public SimpleEnemy() {
-        super(10);
-
-        setImage(Globals.getInstance().getImage("SimpleEnemy"));
+        setImage(Globals.getInstance().getImage("RandomEnemy"));
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        double direction = rnd.nextDouble() * 360;
+        direction = rnd.nextInt(4) * 90;
         setRotate(direction);
+
 
         int speed = 1;
         heading = Utils.directionToVector(direction, speed);
@@ -32,10 +32,23 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
 
     @Override
     public void step() {
+        int distance = rnd.nextInt(200) + 50;
+
         if (isOutOfBounds()) {
-//            destroy();
             bounceBack();
+//            destroy();
+
+            direction += 180;
         }
+
+        travelled += Math.abs(heading.getX()) + Math.abs(heading.getY());
+//        System.out.println(travelled);
+        if (travelled % distance == 0) {
+            double direction = travelled;
+            heading = Utils.directionToVector(direction, rnd.nextInt(2) + 1);
+        }
+
+
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }

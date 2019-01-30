@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.enemies;
 
+import com.codecool.snake.GameTimer;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -12,19 +13,20 @@ import javafx.geometry.Point2D;
 
 
 
-public class SimpleEnemy extends Enemy implements Animatable, Interactable {
+public class SquareEnemy extends Enemy implements Animatable, Interactable {
 
-    private static Random rnd = new Random();
 
-    public SimpleEnemy() {
-        super(10);
+    public SquareEnemy() {
+        super(15);
+        travelled = rnd.nextInt(360);
 
-        setImage(Globals.getInstance().getImage("SimpleEnemy"));
+        setImage(Globals.getInstance().getImage("SquareEnemy"));
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        double direction = rnd.nextDouble() * 360;
+        direction = rnd.nextInt(4) * 90;
         setRotate(direction);
+
 
         int speed = 1;
         heading = Utils.directionToVector(direction, speed);
@@ -32,10 +34,20 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
 
     @Override
     public void step() {
+
         if (isOutOfBounds()) {
 //            destroy();
-            bounceBack();
+            heading = Utils.directionToVector(direction + 180, rnd.nextInt(3) + 1);
         }
+
+        travelled += Math.abs(heading.getX()) + Math.abs(heading.getY());
+//        System.out.println(travelled);
+        if (travelled % 90 == 0) {
+            double direction = travelled;
+            heading = Utils.directionToVector(direction, rnd.nextInt(4) + 1);
+        }
+
+
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }
