@@ -15,7 +15,7 @@ import javafx.geometry.Point2D;
 public class RandomEnemy extends Enemy implements Animatable, Interactable {
 
     public RandomEnemy() {
-        super(10);
+        super(13);
         travelled = rnd.nextInt(180);
 
         setImage(Globals.getInstance().getImage("RandomEnemy"));
@@ -42,7 +42,7 @@ public class RandomEnemy extends Enemy implements Animatable, Interactable {
         }
 
         travelled += Math.abs(heading.getX()) + Math.abs(heading.getY());
-        System.out.println(travelled);
+//        System.out.println(travelled);
         if (travelled % distance == 0) {
             double direction = travelled;
             heading = Utils.directionToVector(direction, rnd.nextInt(2) + 1);
