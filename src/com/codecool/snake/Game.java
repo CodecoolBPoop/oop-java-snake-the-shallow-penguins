@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.RandomEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.enemies.SquareEnemy;
@@ -8,16 +9,19 @@ import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.eventhandler.InputHandler;
 
 import com.sun.javafx.geom.Vec2d;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+
+import java.util.Iterator;
 
 
 public class Game extends Pane {
     private Snake snake = null;
     private GameTimer gameTimer = new GameTimer();
 
-    private Button restartBtn = new Button("Restart");
+    private Button restartBtn = new Button("next level");
 
 
     public Game() {
@@ -44,6 +48,7 @@ public class Game extends Pane {
         getChildren().add(restartBtn);
         addButtonsEventHandlers();
     }
+
 
     public void start() {
         setupInputHandling();
@@ -80,26 +85,41 @@ public class Game extends Pane {
         restartBtn.setOnAction((event -> restartGame()));
     }
 
+    void cleanUp() {
+        Iterator snakeBody = this.snake.body.getList().iterator();
+        Iterator sprite = this.getChildren().iterator();
+
+        while (snakeBody.hasNext()) {
+            ((GameEntity) snakeBody.next()).destroy();
+        }
+        this.snake.body.clear();
+
+        while (sprite.hasNext()) {
+            ((GameEntity) sprite.next()).destroy();
+        }
+//        this.snake.health = 0;
+//        this.snake.speed = 2;
+//        this.snake.life.resetHealth(this.snake.startingHealth);
+    }
+
+    void setSnake() {
+        this.snake.head.setX(500);
+        this.snake.head.setY(500);
+        this.snake.addPart(4);
+
+        this.snake.head.setRotate(0);
+        Globals.getInstance().startGame();
+
+        spawnSimpleEnemies(10);
+        spawnRandomEnemies(4);
+        spawnSquareEnemies(4);
+        spawnPowerUps(4);
+    }
+
+
     public void restartGame() {
-
-//        this.getChildren().clear();
-
-        Globals.getInstance().display.clear();
-//        this.getChildren().removeAll();
-//
-//        for (int i = 0; i < getChildren().size(); i++) {
-//            getChildren().get(i).
-//        }
-
-
-
-        System.out.println(this.getChildren());
-
-        Globals.getInstance().game = this;
-        Globals.getInstance().display = new Display(this);
-        Globals.getInstance().setupResources();
-        init();
-        start();
+        cleanUp();
+        setSnake();
     }
 
 
