@@ -68,18 +68,18 @@ public class Game extends Pane {
     public void displayHealth(){
 
 
-        Text t = new Text (90,35, "" + snake.getHealth());
+        Text t = new Text (100,60, "" + snake.getHealth());
         t.setFont(Font.font ("Verdana", FontWeight.BOLD, 32));
         t.setFill(Color.rgb(250,118,114));
 
-        Text healthNum = new Text( 10, 35, "Health: ");
+        Text healthNum = new Text( 10, 60, "Health: ");
         healthNum.setFont(Font.font ("Fraktur", FontWeight.EXTRA_BOLD, 22));
         healthNum.setFill(Color.rgb(7,128,4));
 
 
         for (Node node : getChildren()
              ) {
-            System.out.println(node.toString());
+//            System.out.println(node.toString());
             if (node instanceof Text){
                 getChildren().remove(node);
             }
@@ -153,8 +153,18 @@ public class Game extends Pane {
 
 
     public void restartGame() {
-        cleanUp();
-        setSnake();
+//        cleanUp();
+//        setSnake();
+
+        this.getChildren().clear();
+        Globals.getInstance().game = this;
+        Globals.getInstance().display = new Display(this);
+        Globals.getInstance().setupResources();
+
+        init();
+
+        displayHealth();
+        start();
     }
 
 
