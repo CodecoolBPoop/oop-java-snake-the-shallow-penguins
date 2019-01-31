@@ -37,6 +37,8 @@ public class Game extends Pane {
         init();
 
         displayHealth();
+        displayScore();
+
     }
 
     public void init() {
@@ -56,7 +58,6 @@ public class Game extends Pane {
         Globals.getInstance().setGameLoop(gameLoop);
 
 
-
         gameTimer.setup(gameLoop::step);
         gameTimer.play();
 
@@ -71,22 +72,25 @@ public class Game extends Pane {
 
     }
 
-    public void displayHealth(){
+    public void displayHealth() {
 
 
-        Text t = new Text (100,60, "" + snake.getHealth());
-        t.setFont(Font.font ("Verdana", FontWeight.BOLD, 32));
-        t.setFill(Color.rgb(250,118,114));
+        Text t = new Text(110, 35, "" + snake.getHealth());
+        t.setFont(Font.font("Verdana", FontWeight.BOLD, 32));
+        t.setFill(Color.rgb(250, 118, 114));
 
         Text healthNum = new Text( 10, 60, "Health: ");
         healthNum.setFont(Font.font ("Fraktur", FontWeight.EXTRA_BOLD, 22));
         healthNum.setFill(Color.rgb(70,128,40));
+        Text healthNum = new Text(10, 35, "Health: ");
+        healthNum.setFont(Font.font("Fraktur", FontWeight.EXTRA_BOLD, 22));
+        healthNum.setFill(Color.rgb(7, 128, 4));
 
 
         for (Node node : getChildren()
-             ) {
-//            System.out.println(node.toString());
-            if (node instanceof Text){
+        ) {
+            System.out.println(node.toString());
+            if (node instanceof Text) {
                 getChildren().remove(node);
             }
         }
@@ -94,6 +98,23 @@ public class Game extends Pane {
         getChildren().add(healthNum);
         getChildren().add(t);
     }
+
+
+    public void displayScore(){
+
+        Text t = new Text (580,35, "" + snake.getScore());
+        t.setFont(Font.font ("Verdana", FontWeight.BOLD, 32));
+        t.setFill(Color.rgb(250,118,114));
+
+        Text scoreNum = new Text(490 , 35, "Score: ");
+        scoreNum.setFont(Font.font ("Fraktur", FontWeight.EXTRA_BOLD, 22));
+        scoreNum.setFill(Color.rgb(7,128,4));
+
+        getChildren().add(scoreNum);
+        getChildren().add(t);
+    }
+
+
 
     private void spawnSnake() {
         snake = new Snake(new Vec2d(500, 500));
