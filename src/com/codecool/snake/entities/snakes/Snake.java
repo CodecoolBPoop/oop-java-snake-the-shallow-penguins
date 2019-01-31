@@ -17,7 +17,9 @@ public class Snake implements Animatable {
         return health;
     }
 
-    private int health = 100;
+    private int health = 1000;
+    public int snake1Score = 0;
+
 
     private SnakeHead head;
     private DelayedModificationList<GameEntity> body;
@@ -58,9 +60,17 @@ public class Snake implements Animatable {
         Globals.getInstance().display.updateSnakeHeadDrawPosition(head);
     }
 
+
     public void changeHealth(int diff) {
         health -= diff;
     }
+
+
+    public void setSnakeScoreBy(int scoreChangeBy) {
+        snake1Score += scoreChangeBy;
+        System.out.println(snake1Score);
+    }
+
 
     private void checkForGameOverConditions() {
         if (head.isOutOfBounds() || health <= 0) {
@@ -83,4 +93,8 @@ public class Snake implements Animatable {
         if(result != null) return result;
         return head;
     }
+
+    public int getScore() { return snake1Score;
+    }
 }
+

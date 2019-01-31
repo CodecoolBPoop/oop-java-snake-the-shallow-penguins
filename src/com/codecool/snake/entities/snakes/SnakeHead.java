@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.Game;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
@@ -45,16 +46,25 @@ public class SnakeHead extends GameEntity implements Interactable {
             System.out.println(getMessage());
             snake.changeHealth(((Enemy) entity).getDamage());
             Globals.getInstance().game.displayHealth();
+            Globals.getInstance().game.displayScore();
+
         }
         if(entity instanceof SimplePowerUp){
             System.out.println(getMessage());
             snake.addPart(4);
+            snake.setSnakeScoreBy(5);
+            Globals.getInstance().game.displayScore();
+
+
         }
+
     }
 
 
-    @Override
+
+            @Override
     public String getMessage() {
-        return "IMMA SNAEK HED! SPITTIN' MAH WENOM! SPITJU-SPITJU!";
+        return "IMMA SNAEK HED! SPITTIN' MAH WENOM! SPITJU-SPITJU! PLease kill me I hate" +
+                "this game!!!!";
     }
 }

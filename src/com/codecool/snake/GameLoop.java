@@ -24,6 +24,7 @@ public class GameLoop {
     public void step() {
         if(running) {
             snake.step();
+            Text.adjustScores(snake);
             for (GameEntity gameObject : Globals.getInstance().display.getObjectList()) {
                 if (gameObject instanceof Animatable) {
                     ((Animatable) gameObject).step();
