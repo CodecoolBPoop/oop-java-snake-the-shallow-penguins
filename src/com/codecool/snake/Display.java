@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 
 
 public class Display {
-    private Pane displayPane;
+    public Pane displayPane;
     private DelayedModificationList<GameEntity> gameObjects = new DelayedModificationList<>();
 
     public Display(Pane pane) {
