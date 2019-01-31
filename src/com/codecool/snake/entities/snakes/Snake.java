@@ -21,8 +21,8 @@ public class Snake implements Animatable {
     public int snake1Score = 0;
 
 
-    private SnakeHead head;
-    private DelayedModificationList<GameEntity> body;
+    public SnakeHead head;
+    public DelayedModificationList<GameEntity> body;
 
 
     public Snake(Vec2d position) {
