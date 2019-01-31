@@ -12,12 +12,12 @@ import com.sun.javafx.geom.Vec2d;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.FontWeight;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
-
 
 import java.util.Iterator;
 
@@ -26,7 +26,7 @@ public class Game extends Pane {
     private Snake snake = null;
     private GameTimer gameTimer = new GameTimer();
 
-    private Button restartBtn = new Button("next level");
+    private Button restartBtn = new Button("Restart");
 
 
     public Game() {
@@ -40,6 +40,12 @@ public class Game extends Pane {
     }
 
     public void init() {
+
+        BackgroundImage myBI= new BackgroundImage(new Image("bg.jpg",1450,800,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        this.setBackground(new Background(myBI));
+
         spawnSnake();
         spawnSimpleEnemies(10);
         spawnRandomEnemies(4);

@@ -35,6 +35,7 @@ public class Globals {
         resources.addImage("RandomEnemy", new Image("random_enemy_pici.png"));
         resources.addImage("SquareEnemy", new Image("square_enemy_pici.png"));
         resources.addImage("PowerUpBerry", new Image("powerup_berry.png"));
+        resources.addImage("BackGround", new Image("backGround.jpeg"));
     }
 
     public Image getImage(String name) { return resources.getImage(name); }
