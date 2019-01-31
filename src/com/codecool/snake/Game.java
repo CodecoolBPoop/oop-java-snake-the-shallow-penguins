@@ -80,7 +80,7 @@ public class Game extends Pane {
 
         Text healthNum = new Text( 10, 60, "Health: ");
         healthNum.setFont(Font.font ("Fraktur", FontWeight.EXTRA_BOLD, 22));
-        healthNum.setFill(Color.rgb(7,128,4));
+        healthNum.setFill(Color.rgb(70,128,40));
 
 
         for (Node node : getChildren()
